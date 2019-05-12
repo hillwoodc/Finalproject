@@ -9,7 +9,20 @@ import { Choice } from "../../components/Choice";
 import { Input, FormBtn } from "../../components/Form";
 
 class Coupons extends Component {
-  state = {
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      isAuthenticated: false
+    };
+  }
+  
+  userHasAuthenticated = authenticated => {
+    this.setState({ isAuthenticated: authenticated });
+  }
+  
+
+  state = { 
     coupons: [],
     title: "",
     source: "",
@@ -55,6 +68,11 @@ class Coupons extends Component {
   };
 
   render() {
+    const childProps = {
+      isAuthenticated: this.state.isAuthenticated,
+      userHasAuthenticated: this.userHasAuthenticated
+    };
+    
     return (
       <Container fluid>
         <Row>

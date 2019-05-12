@@ -55,6 +55,17 @@ class ShoppingList extends Component {
         </List>
         <Row>
           <Col size="md-2">
+            {this.state.isAuthenticated
+              ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
+              : <Fragment>
+                  <LinkContainer to="/signup">
+                    <NavItem>Signup</NavItem>
+                  </LinkContainer>
+                  <LinkContainer to="/login">
+                    <NavItem>Login</NavItem>
+                  </LinkContainer>
+                </Fragment>
+            }
             <Link to="/">← Back to Search Results</Link>
           </Col>
         </Row>
