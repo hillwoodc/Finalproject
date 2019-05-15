@@ -1,52 +1,39 @@
-import React from "react";
+import React, { Fragment, useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Coupons from "./pages/Coupons";
-import Detail from "./pages/Detail";
-import ShoppingList from "./pages/ShoppingList";
-import WishList from "./pages/WishList";
-import NoMatch from "./pages/NoMatch";
-import Nav from "./components/Nav";
-import Form from "./Login/Form";
-import AppliedRoute from "./components/AppliedRoute";
+import Navbar from "./components/layout/Navbar";
+import Landing from "./components/layout/Landing";
+import Routes from "./components/routing/Routes";
 
+// Redux
+import { Provider } from "react-redux";
+import store from "./store";
+import { loadUser } from "./actions/auth";
+import setAuthToken from "./utils/setAuthToken";
 
-class App extends Component {
-constructor(props) {
-  super(props);
+import "./App.css";
 
-  this.state = {
-    isAuthenticated: false
-  };
+if (localStorage.token) {
+  setAuthToken(localStorage.token);
 }
 
-userHasAuthenticated = authenticated => {
-  this.setState({ isAuthenticated: authenticated });
-}
+const App = () => {
+  useEffect(() => {
+    store.dispatch(loadUser());
+  }, []);
 
-
-const App = () => (
-  <Router>
-    <div>
-      <Nav />
-      <Switch>
-        <Routes childProps={childProps} />
-        <Route exact path="/" component={Coupons} />
-        <Route exact path="/coupons" component={Coupons} />
-        <Route exact path="/shoppinglist" component={ShoppingList} />
-        <Route exact path="/wishlist" component={WishList} />
-        <Route exact path="/coupons/:id" component={Detail} />
-        <Route exact path="/form" exact component={Form} />
-        <Route component={NoMatch} />
-      </Switch>
-    </div>
-  </Router>
-);
-
-export default ({ childProps }) =>
-  <Switch>
-    <AppliedRoute path="/" exact component={Home} props={childProps} />
-    <AppliedRoute path="/login" exact component={Login} props={childProps} />
-    { /* Finally, catch all unmatched routes */ }
-    <Route component={NotFound} />
-  </Switch>;
+  return (
+    <Provider store={store}>
+      <Router>
+        <Fragment>
+          <Navbar />
+          <Switch>
+            <Route exact path='/' component={Landing} />
+            <Route component={Routes} />
+          </Switch>
+        </Fragment>
+      </Router>
+    </Provider>
+  );
 };
+
+export default App;

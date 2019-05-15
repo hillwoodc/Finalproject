@@ -1,14 +1,82 @@
-// this will handle getting json web token for WebAuthentication
-
-// Bring in express routers because routes are going to be in different locations
-
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require("bcryptjs");
+const auth = require("../../middleware/auth");
+const jwt = require("jsonwebtoken");
+const config = require("config");
+const { check, validationResult } = require("express-validator/check");
 
-// @route  GET api/auth
-// @desc 	 Test route
-// @access Public (Need token if Private route with Auth Middleware)
+const User = require("../../models/User");
+// @route   GET api/auth
+// @desc    Test route
+// @access  Public
+router.get("/", auth, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
-router.get('/', (req, res) => res.send('User route'));
+// @route   POST api/auth
+// @desc    Authenticate user/get token
+// @access  Public
+router.post(
+  "/",
+  [
+    check("email", "Please include valid email").isEmail(),
+    check("password", "Password is required").exists()
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+    // destructure
+    const { email, password } = req.body;
+
+    try {
+      // See if user exits(if exists send back error)
+      let user = await User.findOne({ email });
+
+      if (!user) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid Credentials" }] });
+      }
+
+      // Match email and password
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
+        return res
+          .status(400)
+          .json({ errors: [{ msg: "Invalid Credentials" }] });
+      }
+      // Return jsonwebtoken. need this to be logged in
+      const payload = {
+        user: {
+          //   mongodb uses an underscoreID, however mongoose uses an abstractionID, no underscore necessary
+          id: user.id
+        }
+      };
+
+      jwt.sign(
+        payload,
+        config.get("jwtSecret"),
+        { expiresIn: 36000000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      );
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  }
+);
+
+module.exports = router;
