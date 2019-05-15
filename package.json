@@ -1,16 +1,16 @@
 {
-  "name": "FinalProject",
+  "name": "finalproject",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start": "node server",
     "start:prod": "node server.js",
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "build": "cd client && npm run build",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "",
   "license": "ISC",
@@ -21,10 +21,16 @@
   "dependencies": {
     "axios": "^0.18.0",
     "dotenv": "*",
-    "express": "^4.16.3",
     "if-env": "^1.0.4",
     "mongodb": "*",
-    "mongoose": "^5.3.16",
-    "node": "^12.2.0"
+    "node": "^12.2.0",
+    "bcryptjs": "^2.4.3",
+    "config": "^3.1.0",
+    "express": "^4.16.4",
+    "express-validator": "^5.3.1",
+    "gravatar": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.5.1",
+    "request": "^2.88.0"
   }
 }
