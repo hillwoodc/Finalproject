@@ -116,7 +116,7 @@ export const deleteCoupon = cpid => async dispatch => {
 
 // Add coupon
 
-export const addCoupons = formData => async dispatch => {
+export const addCoupons = async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -124,7 +124,7 @@ export const addCoupons = formData => async dispatch => {
   };
 
   try {
-    const res = await axios.coupons("/api/coupons", formData, config);
+    const res = await axios.coupons("/api/coupons", config);
 
     dispatch({
       type: ADD_COUPONS,
