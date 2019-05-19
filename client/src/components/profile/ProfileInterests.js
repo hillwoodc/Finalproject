@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Moment from 'react-moment';
 
-const ProfileExperience = ({
+const ProfileInterests = ({
   experience: { company, title, location, current, to, from, description }
 }) => (
   <div>
@@ -20,8 +20,8 @@ const ProfileExperience = ({
   </div>
 );
 
-ProfileExperience.propTypes = {
-  experience: PropTypes.array.isRequired
+ProfileInterests.propTypes = {
+  Interests: PropTypes.array.isRequired
 };
 
-export default ProfileExperience;
+export default ProfileInterests;
