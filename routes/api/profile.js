@@ -52,16 +52,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const {
-      name,
-      location,
-      household,
-      events,
-      automotive,
-      health,
-      educational,
-      groceries
-    } = req.body;
+    const { name, location } = req.body;
 
     // Build profile object
     const profileFields = {};
@@ -70,14 +61,6 @@ router.post(
     if (location) profileFields.location = location;
     if (status) profileFields.status = status;
 
-    // Build social object
-    // profileFields.interests = {};
-    // if (household) profileFields.interests.household = household;
-    // if (events) profileFields.interests.events = events;
-    // if (automotive) profileFields.interests.automotive = automotive;
-    // if (health) profileFields.interests.health = health;
-    // if (educational) profileFields.interests.eductaional = educational;
-    // if (groceries) profileFields.interests.groceries = groceries;
     // Update and insert Data
     try {
       let profile = await Profile.findOne({ user: req.user.id });
