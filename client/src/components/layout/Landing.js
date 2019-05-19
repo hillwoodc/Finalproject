@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 const Landing = ({ isAuthenticated }) => {
   if (isAuthenticated) {
@@ -12,7 +12,11 @@ const Landing = ({ isAuthenticated }) => {
     <section className='landing'>
       <div className='dark-overlay'>
         <div className='landing-inner'>
+<<<<<<< HEAD
           <h1 className='x-large'>Coupons Collector</h1>
+=======
+          <h1 className='x-large'>Coupon Collector</h1>
+>>>>>>> 7d474250e11bcb49b7379b4c5c18c21b6c359bd1
           <p className='lead'>
             Create a collector profile/portfolio, share posts and get help from
             other collectors
