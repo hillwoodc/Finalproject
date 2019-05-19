@@ -1,12 +1,12 @@
-import React, { Fragment, useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Spinner from '../layout/Spinner';
-import ProfileTop from './ProfileTop';
-import ProfileAbout from './ProfileAbout';
-import ProfileInterests from './ProfileInterests';
-import { getProfileById } from '../../actions/profile';
+import React, { Fragment, useEffect } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Spinner from "../layout/Spinner";
+import ProfileTop from "./ProfileTop";
+import ProfileAbout from "./ProfileAbout";
+import ProfileInterests from "./ProfileInterests";
+import { getProfileById } from "../../actions/profile";
 
 const Profile = ({
   getProfileById,
@@ -37,22 +37,28 @@ const Profile = ({
           <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
+
             <div className='profile-exp bg-white p-2'>
               <h2 className='text-primary'>Interests</h2>
-              {profile.Interests.length > 0 ? (
+
+              {profile.interests.length > 0 ? (
                 <Fragment>
-                  {profile.Interests.map(Interests => (
+                  {profile.category.map(interests => (
                     <ProfileInterests
-                      key={Interests._id}
-                      Interests={Interests}
+                      key={interests._id}
+                      category={interests}
                     />
                   ))}
                 </Fragment>
               ) : (
-                <h4>No Interests credentials</h4>
+                <h4>No Interests Selected</h4>
               )}
             </div>
-          
+          </div>
+        </Fragment>
+      )}
+    </Fragment>
+  );
 };
 
 Profile.propTypes = {

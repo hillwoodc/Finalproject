@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import CouponItem from "./CouponItem";
 import GetAllCoupons from "./GetAllCoupons";
-import { getCoupons } from "../../actions/coupon";
+import { getCoupons } from "../../actions/coupons";
 
 const Coupons = ({ getCoupons, coupon: { coupons, loading } }) => {
   useEffect(() => {

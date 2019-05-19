@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
-import Moment from "react-moment";
 import { connect } from "react-redux";
 import { deleteInterests } from "../../actions/profile";
 
@@ -8,15 +7,7 @@ const Category = ({ category, deleteInterests }) => {
   const interests = category.map(cat => (
     <tr key={cat._id}>
       <td>{cat.company}</td>
-      <td className='hide-sm'>{cat.title}</td>
-      <td>
-        <Moment format='YYYY/MM/DD'>{cat.from}</Moment> -{" "}
-        {cat.to === null ? (
-          " Now"
-        ) : (
-          <Moment format='YYYY/MM/DD'>{cat.to}</Moment>
-        )}
-      </td>
+      <td className='hide-sm'>{cat.title}</td>) : (
       <td>
         <button
           onClick={() => deleteInterests(cat._id)}

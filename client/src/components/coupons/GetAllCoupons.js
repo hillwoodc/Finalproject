@@ -49,10 +49,10 @@ GetAllCoupons = props => (
       <div>
         <img src={props.deal.image_url} alt='' />
       </div>
-      <p>${coupon.description}</p>
+      {/* <p>${coupon.description}</p> */}
       <div>${props.deal.expires}</div>
-      <button className='left'>${coupon.shop}</button>
-      <button className='right'>${coupon.wish}</button>
+      {/* <button className='left'>${coupon.shop}</button>
+      <button className='right'>${coupon.wish}</button> */}
       <h4>Value At: ${props.deal.value}</h4>
       <h4>Discount: {Math.round(props.deal.discount_percentage * 100)}%</h4>
       <h3>Now: ${props.deal.price}</h3>

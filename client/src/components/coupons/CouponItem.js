@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Moment from "react-moment";
 import { connect } from "react-redux";
 import {
   addShop,
@@ -18,7 +17,7 @@ const CouponItem = ({
   removeWish,
   deleteCoupon,
   auth,
-  coupon: { _cpid, description, title, user, shop, wish, date, image },
+  coupon: { _cpid, title, user, shop, wish, image },
   showActions
 }) => (
   <div className='post bg-white p-1 my-1'>
@@ -28,12 +27,8 @@ const CouponItem = ({
         <h4>{title}</h4>
       </Link>
     </div>
-    <div>
-      <p className='my-1'>{description}</p>
-      <p className='post-date'>
-        Added on <Moment format='YYYY/MM/DD'>{date}</Moment>
-      </p>
 
+    <div>
       {showActions && (
         <Fragment>
           <button

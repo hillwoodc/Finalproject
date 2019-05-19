@@ -12,7 +12,13 @@ const EditProfile = ({
 }) => {
   const [formData, setFormData] = useState({
     name: "",
-    location: ""
+    location: "",
+    automotive: "",
+    groceries: "",
+    events: "",
+    household: "",
+    educational: "",
+    health: ""
   });
 
   const [displayInterests, toggleInterests] = useState(false);
@@ -22,7 +28,6 @@ const EditProfile = ({
 
     setFormData({
       name: loading || !profile.name ? "" : profile.name,
-      website: loading || !profile.website ? "" : profile.website,
       location: loading || !profile.location ? "" : profile.location,
       health: loading || !profile.interests ? "" : profile.interests.health,
       automotive:

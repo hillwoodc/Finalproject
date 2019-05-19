@@ -1,17 +1,16 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
-import Register from '../auth/Register';
-import Login from '../auth/Login';
-import Alert from '../layout/Alert';
-import Dashboard from '../dashboard/Dashboard';
-import CreateProfile from '../profile-forms/CreateProfile';
-import EditProfile from '../profile-forms/EditProfile';
-import AddInterests from '../profile-forms/AddInterests';
-import Profile from '../profile/Profile';
-import Posts from '../posts/Posts';
-import Post from '../post/Post';
-import NotFound from '../layout/NotFound';
-import PrivateRoute from '../routing/PrivateRoute';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
+import Register from "../auth/Register";
+import Login from "../auth/Login";
+import Alert from "../layout/Alert";
+import Dashboard from "../dashboard/Dashboard";
+import CreateProfile from "../profile-forms/CreateProfile";
+import EditProfile from "../profile-forms/EditProfile";
+import AddInterests from "../profile-forms/AddInterests";
+import Profile from "../profile/Profile";
+import Coupons from "../coupons/Coupons";
+import NotFound from "../layout/NotFound";
+import PrivateRoute from "../routing/PrivateRoute";
 
 const Routes = () => {
   return (
@@ -25,8 +24,7 @@ const Routes = () => {
         <PrivateRoute exact path='/create-profile' component={CreateProfile} />
         <PrivateRoute exact path='/edit-profile' component={EditProfile} />
         <PrivateRoute exact path='/add-Interests' component={AddInterests} />
-        <PrivateRoute exact path='/posts' component={Posts} />
-        <PrivateRoute exact path='/posts/:id' component={Post} />
+        <PrivateRoute exact path='/coupons' component={Coupons} />
         <Route component={NotFound} />
       </Switch>
     </section>
