@@ -141,8 +141,8 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-// @route    PUT api/profile/experience
-// @desc     Add profile experience
+// @route    PUT api/profile/interests
+// @desc     Add profile interests
 // @access   Private
 router.put("/interests", async (req, res) => {
   const errors = validationResult(req);
@@ -182,7 +182,7 @@ router.put("/interests", async (req, res) => {
   }
 });
 
-// @route    DELETE api/profile/experience/:exp_id
+// @route    DELETE api/profile/experience/:int_id
 // @desc     Delete experience from profile
 // @access   Private
 router.delete("/interests/:int_id", auth, async (req, res) => {
