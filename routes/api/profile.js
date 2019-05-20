@@ -41,7 +41,7 @@ router.post(
       check("status", "Status is required")
         .not()
         .isEmpty(),
-      check("location", "location is required")
+      check("interests", "interests are required")
         .not()
         .isEmpty()
     ]
@@ -52,7 +52,7 @@ router.post(
       return res.status(400).json({ errors: errors.array() });
     }
 
-    const { name, location } = req.body;
+    const { name, interests, location } = req.body;
 
     // Build profile object
     const profileFields = {};
@@ -60,6 +60,11 @@ router.post(
     if (name) profileFields.name = name;
     if (location) profileFields.location = location;
     if (status) profileFields.status = status;
+    if (interests) {
+      profileFields.interests = interests
+        .split(",")
+        .map(interest => interest.trim());
+    }
 
     // Update and insert Data
     try {
@@ -141,68 +146,68 @@ router.delete("/", auth, async (req, res) => {
   }
 });
 
-// @route    PUT api/profile/interests
-// @desc     Add profile interests
-// @access   Private
-router.put("/interests", async (req, res) => {
-  const errors = validationResult(req);
-  if (!errors) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+// // @route    PUT api/profile/interests
+// // @desc     Add profile interests
+// // @access   Private
+// router.put("/interests", async (req, res) => {
+//   const errors = validationResult(req);
+//   if (!errors) {
+//     return res.status(400).json({ errors: errors.array() });
+//   }
 
-  const {
-    household,
-    events,
-    automotive,
-    health,
-    educational,
-    groceries
-  } = req.body;
+//   const {
+//     household,
+//     events,
+//     automotive,
+//     health,
+//     educational,
+//     groceries
+//   } = req.body;
 
-  const newInterests = {
-    household,
-    events,
-    automotive,
-    health,
-    educational,
-    groceries
-  };
+//   const newInterests = {
+//     household,
+//     events,
+//     automotive,
+//     health,
+//     educational,
+//     groceries
+//   };
 
-  try {
-    const profile = await Profile.findOne({ user: req.user.id });
+//   try {
+//     const profile = await Profile.findOne({ user: req.user.id });
 
-    profile.interests.unshift(newInterests);
+//     profile.interests.unshift(newInterests);
 
-    await profile.save();
+//     await profile.save();
 
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     res.json(profile);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
-// @route    DELETE api/profile/experience/:int_id
-// @desc     Delete experience from profile
-// @access   Private
-router.delete("/interests/:int_id", auth, async (req, res) => {
-  try {
-    const profile = await Profile.findOne({ user: req.user.id });
+// // @route    DELETE api/profile/experience/:int_id
+// // @desc     Delete experience from profile
+// // @access   Private
+// router.delete("/interests/:int_id", auth, async (req, res) => {
+//   try {
+//     const profile = await Profile.findOne({ user: req.user.id });
 
-    // Get remove index
-    const removeIndex = profile.interests
-      .map(item => item.id)
-      .indexOf(req.params.int_id);
+//     // Get remove index
+//     const removeIndex = profile.interests
+//       .map(item => item.id)
+//       .indexOf(req.params.int_id);
 
-    profile.interests.splice(removeIndex, 1);
+//     profile.interests.splice(removeIndex, 1);
 
-    await profile.save();
+//     await profile.save();
 
-    res.json(profile);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
+//     res.json(profile);
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send("Server Error");
+//   }
+// });
 
 module.exports = router;

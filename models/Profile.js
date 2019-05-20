@@ -16,34 +16,10 @@ const ProfileSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  interests: [
-    {
-      household: {
-        type: Boolean,
-        default: false
-      },
-      events: {
-        type: Boolean,
-        default: false
-      },
-      automotive: {
-        type: Boolean,
-        default: false
-      },
-      health: {
-        type: Boolean,
-        default: false
-      },
-      educational: {
-        type: Boolean,
-        default: false
-      },
-      groceries: {
-        type: Boolean,
-        default: false
-      }
-    }
-  ],
+  interests: {
+    type: [String],
+    required: true
+  },
   date: {
     type: Date,
     default: Date.now

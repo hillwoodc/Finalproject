@@ -3,9 +3,9 @@ import React, { Component } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { addCoupons } from "../../actions/coupons";
-const config = require("config");
-const couponAPI = config.get("api_key");
+import { addCoupon } from "../../actions/coupons";
+// const config = require("config");
+const couponAPI = "api_key";
 
 class GetAllCoupons extends Component {
   constructor(props) {
@@ -17,7 +17,7 @@ class GetAllCoupons extends Component {
 
   componentDidMount() {
     axios
-      .get("https://api.discountapi.com/v2/deals?"`${couponAPI}`)
+      .get("https://api.discountapi.com/v2/deals?="`${couponAPI}`)
       .then(response => {
         console.log(response);
         const data = response.data.deals;
@@ -40,27 +40,27 @@ class GetAllCoupons extends Component {
   }
 }
 
+// const Coupons = getCoupons() => { coupon, shop, wish };
+
 GetAllCoupons = props => (
-  <container>
-    <card>
-      <h3>
-        <strong>Title: </strong> {props.deal.title}
-      </h3>
-      <div>
-        <img src={props.deal.image_url} alt='' />
-      </div>
-      {/* <p>${coupon.description}</p> */}
-      <div>${props.deal.expires}</div>
-      {/* <button className='left'>${coupon.shop}</button>
-      <button className='right'>${coupon.wish}</button> */}
-      <h4>Value At: ${props.deal.value}</h4>
-      <h4>Discount: {Math.round(props.deal.discount_percentage * 100)}%</h4>
-      <h3>Now: ${props.deal.price}</h3>
-      <h3>
-        <a href={props.deal.url}>Buy Now</a>
-      </h3>
-    </card>
-  </container>
+  <card>
+    <h3>
+      <strong>Title: </strong> {props.deal.title}
+    </h3>
+    <div>
+      <img src={props.deal.image_url} alt='' />
+    </div>
+    {/* <p>${coupon.description}</p> */}
+    <div>${props.deal.expires}</div>
+    {/* <button className='left'>${coupon.shop}</button> */}
+    {/* <button className='right'>${coupon.wish}</button> */}
+    <h4>Value At: ${props.deal.value}</h4>
+    <h4>Discount: {Math.round(props.deal.discount_percentage * 100)}%</h4>
+    <h3>Now: ${props.deal.price}</h3>
+    <h3>
+      <a href={props.deal.url}>Buy Now</a>
+    </h3>
+  </card>
 );
 
 GetAllCoupons.propTypes = {
@@ -69,7 +69,7 @@ GetAllCoupons.propTypes = {
 
 export default connect(
   null,
-  { addCoupons }
+  { addCoupon }
 )(GetAllCoupons);
 
 // var request = new XMLHttpRequest()

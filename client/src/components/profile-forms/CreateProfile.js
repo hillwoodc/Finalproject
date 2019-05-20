@@ -7,22 +7,14 @@ import { createProfile } from "../../actions/profile";
 const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     name: "",
-    location: ""
+    location: "",
+    interests: ""
   });
 
   // May need below for toggling interests
-  const [displayInterests, toggleInterests] = useState(false);
+  // const [displayInterests, toggleInterests] = useState(false);
 
-  const {
-    name,
-    location,
-    automotive,
-    groceries,
-    events,
-    household,
-    educational,
-    health
-  } = formData;
+  const { name, location, interests } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -62,86 +54,19 @@ const CreateProfile = ({ createProfile, history }) => {
             City & state suggested (eg. Boston, MA)
           </small>
         </div>
-        <div className='my-2'>
-          <button
-            onClick={() => toggleInterests(!displayInterests)}
-            type='button'
-            className='btn btn-light'
-          >
-            Add Interests
-          </button>
-          <span>Optional</span>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='* Skills'
+            name='interests'
+            value={interests}
+            onChange={e => onChange(e)}
+          />
+          <small className='form-text'>
+            Please use comma separated values (eg.
+            Health,household,groceries,events)
+          </small>
         </div>
-
-        {displayInterests && (
-          <Fragment>
-            <div className='form-group social-input'>
-              <i className='fab fa-twitter fa-2x' />
-              <input
-                type='toggle'
-                placeholder='automotive'
-                name='automotive'
-                value={automotive}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className='form-group social-input'>
-              <i className='fab fa-facebook fa-2x' />
-              <input
-                type='text'
-                placeholder='household'
-                name='household'
-                value={household}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className='form-group social-input'>
-              <i className='fab fa-youtube fa-2x' />
-              <input
-                type='text'
-                placeholder='events'
-                name='events'
-                value={events}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className='form-group social-input'>
-              <i className='fab fa-linkedin fa-2x' />
-              <input
-                type='text'
-                placeholder='health'
-                name='health'
-                value={health}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className='form-group social-input'>
-              <i className='fab fa-instagram fa-2x' />
-              <input
-                type='text'
-                placeholder='educational'
-                name='educational'
-                value={educational}
-                onChange={e => onChange(e)}
-              />
-            </div>
-
-            <div className='form-group social-input'>
-              <i className='fab fa-instagram fa-2x' />
-              <input
-                type='text'
-                placeholder='groceries'
-                name='groceries'
-                value={groceries}
-                onChange={e => onChange(e)}
-              />
-            </div>
-          </Fragment>
-        )}
 
         <input type='submit' className='btn btn-primary my-1' />
         <Link className='btn btn-light my-1' to='/dashboard'>

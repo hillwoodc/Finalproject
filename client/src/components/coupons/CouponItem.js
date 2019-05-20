@@ -17,7 +17,7 @@ const CouponItem = ({
   removeWish,
   deleteCoupon,
   auth,
-  coupon: { _cpid, title, user, shop, wish, image },
+  coupon: { _id, title, user, shop, wish, image },
   showActions
 }) => (
   <div className='post bg-white p-1 my-1'>
@@ -32,7 +32,7 @@ const CouponItem = ({
       {showActions && (
         <Fragment>
           <button
-            onClick={() => addShop(_cpid)}
+            onClick={() => addShop(_id)}
             type='button'
             className='btn btn-light'
           >
@@ -40,7 +40,7 @@ const CouponItem = ({
             <span>{shop.length > 0 && <span>{shop.length}</span>}</span>
           </button>
           <button
-            onClick={() => removeShop(_cpid)}
+            onClick={() => removeShop(_id)}
             type='button'
             className='btn btn-light'
           >
@@ -48,7 +48,7 @@ const CouponItem = ({
           </button>
 
           <button
-            onClick={() => addWish(_cpid)}
+            onClick={() => addWish(_id)}
             type='button'
             className='btn btn-light'
           >
@@ -56,7 +56,7 @@ const CouponItem = ({
             <span>{wish.length > 0 && <span>{wish.length}</span>}</span>
           </button>
           <button
-            onClick={() => removeWish(_cpid)}
+            onClick={() => removeWish(_id)}
             type='button'
             className='btn btn-light'
           >
@@ -65,7 +65,7 @@ const CouponItem = ({
 
           {!auth.loading && user === auth.user._id && (
             <button
-              onClick={() => deleteCoupon(_cpid)}
+              onClick={() => deleteCoupon(_id)}
               type='button'
               className='btn btn-danger'
             >

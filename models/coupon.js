@@ -13,7 +13,7 @@ const CouponSchema = new Schema({
     type: String,
     required: true
   },
-  cpid: {
+  id: {
     type: String,
     required: true
   },

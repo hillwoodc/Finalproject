@@ -9,7 +9,7 @@ import {
   UPDATE_SHOP,
   UPDATE_WISH,
   DELETE_COUPON,
-  ADD_COUPONS
+  ADD_COUPON
 } from "./types";
 
 // Get coupons
@@ -30,13 +30,13 @@ export const getCoupons = () => async dispatch => {
 };
 
 // Add shop/wish
-export const addShop = cpid => async dispatch => {
+export const addShop = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/coupons/shop/${cpid}`);
+    const res = await axios.put(`/api/coupons/shop/${id}`);
 
     dispatch({
       type: UPDATE_SHOP,
-      payload: { cpid, shop: res.data }
+      payload: { id, shop: res.data }
     });
   } catch (err) {
     dispatch({
@@ -46,13 +46,13 @@ export const addShop = cpid => async dispatch => {
   }
 };
 
-export const addWish = cpid => async dispatch => {
+export const addWish = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/coupons/wish/${cpid}`);
+    const res = await axios.put(`/api/coupons/wish/${id}`);
 
     dispatch({
       type: UPDATE_WISH,
-      payload: { cpid, wish: res.data }
+      payload: { id, wish: res.data }
     });
   } catch (err) {
     dispatch({
@@ -63,13 +63,13 @@ export const addWish = cpid => async dispatch => {
 };
 
 // Remove shop/wish
-export const removeShop = cpid => async dispatch => {
+export const removeShop = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/coupons/unshop/${cpid}`);
+    const res = await axios.put(`/api/coupons/unshop/${id}`);
 
     dispatch({
       type: UPDATE_SHOP,
-      payload: { cpid, shop: res.data }
+      payload: { id, shop: res.data }
     });
   } catch (err) {
     dispatch({
@@ -79,13 +79,13 @@ export const removeShop = cpid => async dispatch => {
   }
 };
 
-export const removeWish = cpid => async dispatch => {
+export const removeWish = id => async dispatch => {
   try {
-    const res = await axios.put(`/api/coupons/unwish/${cpid}`);
+    const res = await axios.put(`/api/coupons/unwish/${id}`);
 
     dispatch({
       type: UPDATE_WISH,
-      payload: { cpid, wish: res.data }
+      payload: { id, wish: res.data }
     });
   } catch (err) {
     dispatch({
@@ -96,13 +96,13 @@ export const removeWish = cpid => async dispatch => {
 };
 
 // Delete coupon
-export const deleteCoupon = cpid => async dispatch => {
+export const deleteCoupon = id => async dispatch => {
   try {
-    await axios.delete(`/api/coupons/${cpid}`);
+    await axios.delete(`/api/coupons/${id}`);
 
     dispatch({
       type: DELETE_COUPON,
-      payload: cpid
+      payload: id
     });
 
     dispatch(setAlert("Coupon Removed", "success"));
@@ -116,7 +116,7 @@ export const deleteCoupon = cpid => async dispatch => {
 
 // Add coupon
 
-export const addCoupons = async dispatch => {
+export const addCoupon = async dispatch => {
   const config = {
     headers: {
       "Content-Type": "application/json"
@@ -124,14 +124,14 @@ export const addCoupons = async dispatch => {
   };
 
   try {
-    const res = await axios.coupons("/api/coupons", config);
+    const res = await axios.coupon("/api/coupons", config);
 
     dispatch({
-      type: ADD_COUPONS,
+      type: ADD_COUPON,
       payload: res.data
     });
 
-    dispatch(setAlert("Coupons Created", "success"));
+    dispatch(setAlert("Coupon Created", "success"));
   } catch (err) {
     dispatch({
       type: POST_ERROR,

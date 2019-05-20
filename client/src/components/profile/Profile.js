@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import Spinner from "../layout/Spinner";
 import ProfileTop from "./ProfileTop";
 import ProfileAbout from "./ProfileAbout";
-import ProfileInterests from "./ProfileInterests";
 import { getProfileById } from "../../actions/profile";
+// import ProfileCoupons from "./ProfileCoupons";
 
 const Profile = ({
   getProfileById,
@@ -37,18 +37,17 @@ const Profile = ({
           <div className='profile-grid my-1'>
             <ProfileTop profile={profile} />
             <ProfileAbout profile={profile} />
-
             <div className='profile-exp bg-white p-2'>
               <h2 className='text-primary'>Interests</h2>
 
               {profile.interests.length > 0 ? (
                 <Fragment>
-                  {profile.category.map(interests => (
+                  {/* {profile.category.map(interests => (
                     <ProfileInterests
                       key={interests._id}
                       category={interests}
                     />
-                  ))}
+                  ))} */}
                 </Fragment>
               ) : (
                 <h4>No Interests Selected</h4>

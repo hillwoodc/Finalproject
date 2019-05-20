@@ -3,14 +3,14 @@ const router = express.Router();
 const { check, validationResult } = require("express-validator/check");
 const auth = require("../../middleware/auth");
 
-const Post = require("../../models/Coupon");
+const Coupon = require("../../models/Coupon");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
 // @route    POST api/coupons
 // @desc     Create a coupon in database
 // @access   Private
-router.coupon(
+router.post(
   "/",
   [
     auth,
@@ -32,7 +32,7 @@ router.coupon(
       const newCoupon = new Coupon({
         description: req.body.description,
         title: req.body.title,
-        cpid: req.body.cpid,
+        id: req.body.id,
         image: req.body.image,
         name: user.name,
         user: req.user.id
@@ -64,9 +64,9 @@ router.get("/", auth, async (req, res) => {
 // @route    GET api/coupons/:id
 // @desc     Get coupon by ID
 // @access   Private
-router.get("/:cpid", auth, async (req, res) => {
+router.get("/:id", auth, async (req, res) => {
   try {
-    const coupon = await Coupon.findById(req.params.cpid);
+    const coupon = await Coupon.findById(req.params.id);
 
     if (!coupon) {
       return res.status(404).json({ msg: "Coupon not found" });
@@ -82,12 +82,12 @@ router.get("/:cpid", auth, async (req, res) => {
   }
 });
 
-// @route    DELETE api/coupons/:cpid
+// @route    DELETE api/coupons/:id
 // @desc     Delete a coupon
 // @access   Private
-router.delete("/:cpid", auth, async (req, res) => {
+router.delete("/:id", auth, async (req, res) => {
   try {
-    const coupon = await Coupon.findById(req.params.cpid);
+    const coupon = await Coupon.findById(req.params.id);
 
     if (!coupon) {
       return res.status(404).json({ msg: "Coupon not found" });
@@ -113,9 +113,9 @@ router.delete("/:cpid", auth, async (req, res) => {
 // @route    PUT api/coupons/shop/:id
 // @desc     Shop a coupon
 // @access   Private
-router.put("/shop/:cpid", auth, async (req, res) => {
+router.put("/shop/:id", auth, async (req, res) => {
   try {
-    const coupon = await Coupon.findById(req.params.cpid);
+    const coupon = await Coupon.findById(req.params.id);
 
     // Check if the post has already been liked
     if (
@@ -139,9 +139,9 @@ router.put("/shop/:cpid", auth, async (req, res) => {
 // @route    PUT api/posts/unlike/:id
 // @desc     Like a post
 // @access   Private
-router.put("/unshop/:cpid", auth, async (req, res) => {
+router.put("/unshop/:id", auth, async (req, res) => {
   try {
-    const coupon = await Post.findById(req.params.cpid);
+    const coupon = await Post.findById(req.params.id);
 
     // Check if the post has already been liked
     if (
@@ -170,9 +170,9 @@ router.put("/unshop/:cpid", auth, async (req, res) => {
 // @route    PUT api/coupons/wish/:id
 // @desc     Wish a coupon
 // @access   Private
-router.put("/wish/:cpid", auth, async (req, res) => {
+router.put("/wish/:id", auth, async (req, res) => {
   try {
-    const coupon = await Coupon.findById(req.params.cpid);
+    const coupon = await Coupon.findById(req.params.id);
 
     // Check if the coupn has already been wished
     if (
@@ -196,9 +196,9 @@ router.put("/wish/:cpid", auth, async (req, res) => {
 // @route    PUT api/posts/unlike/:id
 // @desc     Like a post
 // @access   Private
-router.put("/unwish/:cpid", auth, async (req, res) => {
+router.put("/unwish/:id", auth, async (req, res) => {
   try {
-    const coupon = await Post.findById(req.params.cpid);
+    const coupon = await Post.findById(req.params.id);
 
     // Check if the post has already been liked
     if (

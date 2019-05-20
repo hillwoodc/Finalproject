@@ -22,7 +22,7 @@ const Coupons = ({ getCoupons, coupon: { coupons, loading } }) => {
       <GetAllCoupons />
       <div className='posts'>
         {coupons.map(coupon => (
-          <CouponItem key={coupon._cpid} coupon={coupon} />
+          <CouponItem key={coupon._id} coupon={coupon} />
         ))}
       </div>
     </Fragment>

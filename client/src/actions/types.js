@@ -22,4 +22,4 @@ export const COUPON_ERROR = "COUPON_ERROR";
 export const UPDATE_SHOP = "UPDATE_SHOP";
 export const UPDATE_WISH = "UPDATE_WISH";
 export const DELETE_COUPON = "DELETE_COUPON";
-export const ADD_COUPONS = "ADD_COUPON";
+export const ADD_COUPON = "ADD_COUPON";
