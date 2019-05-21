@@ -38,9 +38,6 @@ router.post(
   [
     auth,
     [
-      check("status", "Status is required")
-        .not()
-        .isEmpty(),
       check("interests", "interests are required")
         .not()
         .isEmpty()

@@ -17,7 +17,7 @@ class GetAllCoupons extends Component {
 
   componentDidMount() {
     axios
-      .get("https://api.discountapi.com/v2/deals?="`${couponAPI}`)
+      .get(`https://api.discountapi.com/v2/deals?= ${couponAPI}`)
       .then(response => {
         console.log(response);
         const data = response.data.deals;
@@ -52,8 +52,8 @@ GetAllCoupons = props => (
     </div>
     {/* <p>${coupon.description}</p> */}
     <div>${props.deal.expires}</div>
-    <button className='left'>${props.coupon.shop}</button>
-    <button className='right'>${props.coupon.wish}</button>
+    {/* <button className='left'>${props.coupon.shop}</button> */}
+    {/* <button className='right'>${props.coupon.wish}</button> */}
     <h4>Value At: ${props.deal.value}</h4>
     <h4>Discount: {Math.round(props.deal.discount_percentage * 100)}%</h4>
     <h3>Now: ${props.deal.price}</h3>

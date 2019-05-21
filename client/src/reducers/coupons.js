@@ -15,7 +15,6 @@ const initialState = {
   loading: false,
   error: {}
 };
-
 export default function(state = initialState, action) {
   switch (action.type) {
     case GET_COUPONS:
@@ -24,12 +23,7 @@ export default function(state = initialState, action) {
         coupons: action.payload,
         loading: false
       };
-    case COUPON_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false
-      };
+
     case ADD_COUPON:
       return {
         ...state,
@@ -71,6 +65,12 @@ export default function(state = initialState, action) {
             ? { ...wish, wish: action.payload.wish }
             : wish
         ),
+        loading: false
+      };
+    case COUPON_ERROR:
+      return {
+        ...state,
+        error: action.payload,
         loading: false
       };
     default:
