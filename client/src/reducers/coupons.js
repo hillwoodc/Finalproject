@@ -1,6 +1,5 @@
 import {
   GET_COUPONS,
-  POST_ERROR,
   SHOP_ERROR,
   WISH_ERROR,
   COUPON_ERROR,
@@ -13,7 +12,8 @@ import {
 const initialState = {
   coupons: [],
   coupon: null,
-  loading: false
+  loading: false,
+  error: {}
 };
 
 export default function(state = initialState, action) {
@@ -22,6 +22,12 @@ export default function(state = initialState, action) {
       return {
         ...state,
         coupons: action.payload,
+        loading: false
+      };
+    case COUPON_ERROR:
+      return {
+        ...state,
+        error: action.payload,
         loading: false
       };
     case ADD_COUPON:
@@ -35,12 +41,6 @@ export default function(state = initialState, action) {
         ...state,
         coupons: state.coupons.filter(coupon => coupon._id !== action.payload)
       };
-    case POST_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false
-      };
     case SHOP_ERROR:
       return {
         ...state,
@@ -48,12 +48,6 @@ export default function(state = initialState, action) {
         loading: false
       };
     case WISH_ERROR:
-      return {
-        ...state,
-        error: action.payload,
-        loading: false
-      };
-    case COUPON_ERROR:
       return {
         ...state,
         error: action.payload,

@@ -2,7 +2,6 @@ import axios from "axios";
 import { setAlert } from "./alert";
 import {
   GET_COUPONS,
-  POST_ERROR,
   SHOP_ERROR,
   WISH_ERROR,
   COUPON_ERROR,
@@ -116,25 +115,19 @@ export const deleteCoupon = id => async dispatch => {
 
 // Add coupon
 
-export const addCoupon = async dispatch => {
-  const config = {
-    headers: {
-      "Content-Type": "application/json"
-    }
-  };
-
+export const addCoupon = id => async dispatch => {
   try {
-    const res = await axios.coupon("/api/coupons", config);
+    await axios.add(`/api/coupons/${id}`);
 
     dispatch({
       type: ADD_COUPON,
-      payload: res.data
+      payload: id
     });
 
-    dispatch(setAlert("Coupon Created", "success"));
+    dispatch(setAlert("Coupon Added", "success"));
   } catch (err) {
     dispatch({
-      type: POST_ERROR,
+      type: COUPON_ERROR,
       payload: { msg: err.response.statusText, status: err.response.status }
     });
   }
