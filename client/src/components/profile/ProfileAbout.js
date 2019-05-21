@@ -16,7 +16,7 @@ const ProfileAbout = ({
       </Fragment>
     )}
     <h2 className='text-primary'>Interests</h2>
-    <div className='skills'>
+    <div className='interests'>
       {interests.map((interest, index) => (
         <div key={index} className='p-1'>
           <i className='fas fa-check' /> {interest}
